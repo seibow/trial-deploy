@@ -1,0 +1,33 @@
+{% extends "base/base-loggedin.html" %}
+{% load static %}
+
+{% block body_class %}no-scroll{% endblock %}
+
+{% block title %}
+スモールステップ新規作成 | Habi
+{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'steps/css/step_create.css' %}">
+{% endblock %}
+
+{% block main_content %}
+<!-- 上部ナビ(ボタン部分) -->
+<div class="profile-header">
+    <a href="{% url 'goals:goal_detail' goal.id %}" class="cancel-link">キャンセル</a>
+    <h2>スモールステップ新規作成</h2>
+    <button type="submit" form="step-create-form" class="submit-link">追加</button>
+</div>
+
+<!-- フォーム -->
+<form id="step-create-form" method="post" action="{% url 'steps:step_create' goal.id %}" class="profile-form">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <!-- スモールステップ目標タイトル変更フォーム -->
+        <label for="title">タイトル</label> 
+        <input type="text" id="title" name="title" required>
+    </div>
+</form>
+{% endblock %}

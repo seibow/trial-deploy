@@ -1,0 +1,51 @@
+{# templates/500.html #}
+{% load static %}
+
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>500 Internal Server Error</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body style="background-color: #FFC94314; color: #FFC943;">
+    <main class="container py-5 text-center">
+        <h1 class="fw-bolder fs-1">500</h1>
+        <h3 class="fw-bold fs-3">Internal Server Error</h3>
+
+        <img src="{% static 'img/errors/500.png' %}" alt="星が壊れて困っているうさぎちゃん" class="img-fluid"
+            style="max-width: 300px; margin-inline: auto;">
+
+        <p>アクセスしようとしたページが表示できませんでした。</p>
+
+        <div class="d-grid gap-2 justify-content-center">
+
+            <a href="{% url 'goals:home' %}" class="btn btn-outline-warning" style="
+                --bs-btn-color: #564533;
+                --bs-btn-border-color: #FFC943;
+                --bs-btn-bg: #FFFFFF;
+                --bs-btn-hover-color: #564533;
+                --bs-btn-hover-border-color: #FFC94314;
+            ">
+                ホームに戻る
+            </a>
+
+            <button type="button" class="btn btn-outline-warning" onclick="history.back()" style="
+                --bs-btn-color: #564533;
+                --bs-btn-border-color: #FFC943;
+                --bs-btn-bg: #FFFFFF;
+                --bs-btn-hover-color: #564533;
+                --bs-btn-hover-border-color: #FFC94314;
+            ">
+                前のページに戻る
+            </button>
+
+        </div>
+    </main>
+</body>
+
+</html>

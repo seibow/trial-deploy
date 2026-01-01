@@ -1,0 +1,174 @@
+/* ===== 全体 ===== */
+body {
+    background-color: var(--white);
+    font-family: 'ABeeZee', sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    /* overflow: hidden; */
+}
+
+.login-body .message-container {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    z-index: 9999;
+}
+.login-body {
+    display:flex;
+    justify-content:center;
+    align-items:flex-start; /* ← centerから変更 */
+    min-height:100dvh;      /* ← iPhone用 */
+}
+
+
+/* コンテナ */
+.login-container {
+    background: var(--white);
+    border-radius: 15px;
+    text-align: center;
+    width: 390px;
+    /* transform: translateY(-5%); */
+}
+
+/* ロゴ部分 */
+.logo-area {
+  background: no-repeat center top;
+  background-size: contain; /* または cover */
+  height: 450px; /* 見た目に合わせて調整 */
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+    position: relative;
+    bottom: 24px;
+    top: 400px;
+    left: 50%;
+    width: 90%;
+    font-size: 20px;
+    transform: translate(-50%, -50%);
+    color: var(--brown);
+    margin: 5px 0 15px;
+    background: none;
+    border: 1px solid var(--orange);
+    border-radius: 12px;
+}
+
+/* ===== ラベル ===== */
+label {
+    display: block;
+    font-size: 14px;
+    margin: 15px auto 5px;
+    color: var(--gray);
+    text-align: left;
+    width: 88%;
+}
+
+/* 入力フィールド */
+.login-form {
+    position: relative;
+}
+
+
+.input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--lightgray);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin: 0 auto 18px;
+    width: 90%;
+    background-color: var(--white);
+}
+
+.input-group i {
+    color: var(--orange);
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+
+.input-group input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+    box-sizing: border-box;
+}
+
+
+/* ボタン */
+.login-button,
+.signup-button {
+    display: block;
+    width: 90%;
+    padding: 12px;
+    margin: 12px auto 0;
+    border-radius: 25px;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.login-button {
+    background-color: var(--orange);
+    color: var(--brown);
+    border: none;
+    font-weight: normal;
+}
+
+.signup-button {
+    border: 2px solid var(--orange);
+    color: var(--brown);
+    background: var(--white);
+}
+
+.login-container {
+  transform-origin: center top; /* ← 縮小時の基準点 */
+}
+
+@media (max-height: 800px) {
+    .login-container {
+        transform: scale(0.9) translateY(-5%);
+    }
+}
+
+
+/*
+@media (max-height: 800px) {
+.login-container {
+    transform: scale(0.9) translateY(-5%);
+}
+}
+
+@media (max-height: 700px) {
+.login-container {
+    transform: scale(0.8) translateY(-4%);
+}
+}
+
+@media (max-height: 600px) {
+.login-container {
+    transform: scale(0.7) translateY(-5%);
+}
+}
+
+@media (max-height: 500px) {
+.login-container {
+    transform: scale(0.8) translateY(-8%);
+}
+}
+
+@media (orientation: landscape) {
+.login-container {
+    transform: scale(0.73) translateY(-9%);
+}
+}
+*/
+

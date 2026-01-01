@@ -1,0 +1,40 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block title %}
+    Habi
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'accounts/css/login.css' %}">
+{% endblock %}
+
+{% block body_class %}login-body{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <!--- ロゴ --->
+    <div class="logo-area" style="background-image: url('{% static 'img/logo.png' %}');">
+        <p class="subtitle">〜人生設計をするアプリです〜</p>
+    </div>
+
+    <!--- ログインフォーム --->
+    <form method="post" action="{% url 'login' %}" class="login-form">
+        {% csrf_token %}
+        
+        <label for="email">メールアドレス</label>
+        <div class="input-group">
+            <input id="email" type="email" name="email" required>
+        </div>
+
+        <label for="password">パスワード</label>
+        <div class="input-group">
+            <input id="password" type="password" name="password" required>
+        </div>
+        
+        <button type="submit" class="login-button">ログイン</button>
+        <a href="{% url 'signup' %}" class="signup-button">新規登録</a>
+    </form>
+</div>
+{% endblock %}
+    

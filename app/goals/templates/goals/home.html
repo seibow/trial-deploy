@@ -1,0 +1,71 @@
+{% extends "base/base-loggedin.html" %}
+{% load static %}
+{% block title %}
+    Habi | Home
+{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'goals/css/home.css' %}">
+{% endblock %}
+
+{% block main_content %}
+  <div class="d-flex align-items-center" style="height: 100%;">
+    <!-- ＋ボタン -->
+    <div class="flex-shrink-0" style="margin-bottom: 20px;">
+      <a href="{% url 'goals:create' %}">
+        <img src="{% static 'goals/img/add-circle-yellow.png' %}" 
+                alt="作成" 
+            >
+      </a>
+    </div>
+    <!-- 横スクロール可能なタブ見出し部分 -->
+    <div class="flex-grow-1" style="overflow-x: auto; overflow-y: hidden; height: 100px;">
+      <ul class="nav nav-tabs flex-nowrap" 
+        style="white-space: nowrap; border-bottom: none; margin: 0; padding: 0; height: 82px;">
+        {% for future_age, data in goals_by_age.items %}
+        <li class="nav-item" style="flex: 0 0 auto; height: 82px;">
+          <a class="nav-link moon-tab d-flex align-items-center justify-content-center {% if future_age == active_age %}active{% endif %}" 
+            id="tab-{{ future_age }}" 
+            data-bs-toggle="tab" 
+            href="#age{{ future_age }}" 
+            role="tab"
+            style="background-image: url('{% static 'goals/img/moon/' %}{{ data.moon_image }}');">
+            {{ future_age }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <!-- 各年齢の内容部分 -->
+  <div class="tab-content mt-3">
+    {% for future_age, data in goals_by_age.items %}
+    <div class="tab-pane fade {% if future_age == active_age %}show active{% endif %}" id="age{{ future_age }}" role="tabpanel">
+      {% for goal in data.goals %}
+      <div class="goal-item">
+          <form method="POST" action="{% url 'goals:complete_goal' goal.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn p-0 border-0 bg-transparent">
+              {% if goal.is_done %}
+                <img src="{% static 'img/check-circle.png' %}" alt="完了">
+              {% else %}
+                <img src="{% static 'img/empty-circle.png' %}" alt="未完了">
+              {% endif %}
+            </button>
+          </form>
+          <p>{{ goal.future_month }}</p>
+          <a href="{% url 'goals:goal_detail' goal.id %}">
+            <h3>{{ goal.title }}</h3>
+          </a>
+        </div>
+      {% endfor %}
+      </div>
+    {% empty %}
+      <div class="text-center text-muted my-4">
+        <p>長期目標が登録されていません。</p>
+        <p>早速登録してみましょう！</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

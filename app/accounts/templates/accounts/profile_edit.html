@@ -1,0 +1,62 @@
+{% extends "base/base-loggedin.html" %}
+{% load static %}
+
+{% block title %}
+プロフィール編集 | Habi
+{% endblock %}
+
+{% block css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'accounts/css/profile_edit.css' %}">
+<link rel="stylesheet" href="{% static 'css/modal.css' %}">
+{% endblock %}
+
+{% block main_content %}
+<!-- 上部ナビ(ボタン部分) -->
+    <div class="profile-header">
+        <a href="{% url 'goals:home' %}" class="cancel-link">キャンセル</a>
+        <h2>プロフィール編集</h2>
+        <button type="submit" data-bs-toggle="modal" data-bs-target="#profileeditModal{{ user.username }}" class="submit-link">変更</button>
+    </div>
+
+    <!-- フォーム -->
+    <form id="profile-form" method="post" action="{% url 'profile_edit' user.username %}" class="profile-form">
+    {% csrf_token %}
+
+        <div class="form-group">
+            <!-- ユーザー名変更フォーム -->
+            <label for="name">名前</label>
+            <input type="text" id="name" name="name" value="{{ user.username }}" required>
+        </div>
+
+        <div class="form-group">
+            <!-- メールアドレス変更フォーム -->
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" name="email" value="{{ user.email }}" required>
+        </div>
+
+        <div class="form-group">
+            <!-- パスワード変更フォーム -->
+            <!-- パスワードはセキュリティ上デフォルトでは入力欄に値を入れない -->
+            <label for="password">パスワード変更</label>
+            <input type="password" id="password1" name="password1" placeholder="変更する場合のみ入力">
+        </div>
+
+        <div class="form-group">
+            <!-- パスワード変更フォーム -->
+            <!-- パスワードはセキュリティ上デフォルトでは入力欄に値を入れない -->
+            <label for="password">パスワード変更（確認）</label>
+            <input type="password" id="password2" name="password2" placeholder="変更する場合のみ入力">
+        </div>
+
+        <div class="form-group">
+            <!-- 誕生日変更フォーム -->
+            <label for="birthdate">生年月日</label>
+            <input type="date" id="birthday" name="birthday" value="{{ user.birthday|date:'Y-m-d' }}">
+        </div>
+    </form>
+{% include "modal/profile-edit-modal.html" %}
+{% endblock %}
+
+
+

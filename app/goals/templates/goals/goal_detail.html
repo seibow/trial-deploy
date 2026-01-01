@@ -1,0 +1,93 @@
+{% extends "base/base-loggedin.html" %} 
+{% load static %}
+
+{% block title %}
+    ステップ一覧 | Habi
+{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'goals/css/goal_detail.css' %}">
+{% endblock %}
+
+{% block main_content %}
+<!-- +ボタンとプログレスバーの部分 -->
+    <div class="d-flex align-items-center mb-3">
+        <!-- ＋ボタン -->
+        <a href="{% url 'steps:step_create' goal.id %}" class="me-2 flex-shrink-0">
+            <img src="{% static 'goals/img/add-circle-green.png' %}" 
+                    alt="作成" >
+        </a>
+        <!-- プログレスバー挿入 -->
+        <div class="flex-grow-1" style="min-width: 0; width: 0;">
+            <div class="progress w-100 position-relative" role="progressbar" aria-label="Step progress"
+                aria-valuenow="{{ progress_percent }}" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar bg-success" style="width: {{ progress_percent }}%;"></div>
+
+                {% if progress_percent == 0 %}
+                    <!-- 0%のときは左端に黒文字 -->
+                    <span class="position-absolute top-50 start-0 translate-middle-y ms-2 text-dark fw-bold">
+                    0%
+                    </span>
+                {% else %}
+                    <!-- 1%以上のときはバー幅に合わせて文字も中に -->
+                    <span class="position-absolute top-50 start-0 translate-middle-y text-white fw-bold" style="width: {{ progress_percent }}%; text-align: center;">
+                        {{ progress_percent }}%
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- 選択した長期目標のタイトル。黄色で表示するところ -->
+    <div class="goals_select">
+        <!-- 長期目標達成済チェックボックス -->
+        <p>{{ goal.limit_age.month }}月</p>
+        <p>{{ goal.title }}</p>
+        <!-- 長期目標の編集、削除ができる３点リーダー -->
+        <button type="button" data-bs-toggle="modal" data-bs-target="#edit-or-deleteModal{{ goal.id }}" class="btn p-0 border-0 bg-transparent">
+            <img src="{% static 'goals/img/yellow3pointleader.png' %}" 
+                alt="３点リーダー黄色" 
+            >
+        </button>
+    </div>
+    {% for step in steps %}
+
+    <!-- ステップの一覧。緑色で表示するところ -->
+    <div class="step-items">
+    <!-- チェックボックス挿入予定 -->
+        <form method="POST" action="{% url 'steps:complete_step' step.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn p-0 border-0 bg-transparent">
+            {% if step.is_done %}
+                <img src="{% static 'img/check-circle.png' %}" alt="完了">
+            {% else %}
+                <img src="{% static 'img/empty-circle.png' %}" alt="未完了">
+            {% endif %}
+            </button>
+        </form>
+        <!-- ステップのタイトル -->
+        <div class="step-title {% if step.is_done %}step-done{% endif %}">
+            {{ step.title }}
+        </div>
+        <!-- ステップの削除に進む3点リーダー -->
+        <!-- ステップが達成済みなら、３点リーダーは画像としてあるだけ -->
+        {% if step.is_done %}
+             <img src="{% static 'goals/img/lightgreen3pointleader.png' %}" alt="3点リーダー薄緑色">
+        {% else %}
+            <button type="button" data-bs-toggle="modal" data-bs-target="#stepdeleteModal{{ step.id }}" class="btn p-0 border-0 bg-transparent">
+                <img src="{% static 'goals/img/green3pointleader.png' %}" 
+                    alt="３点リーダー緑色" 
+                >
+            </button>
+        {% endif %}
+  </div>
+  {% include "modal/steps-deletemodal.html" with step=step %}
+{% empty %}
+  <div class="text-center text-muted my-4">
+    <p>スモールステップが登録されていません。</p>
+    <p>早速登録してみましょう！</p>
+  </div>
+{% endfor %}
+{% include "modal/edit-or-deletemodal.html" with goal=goal %}
+{% endblock %}

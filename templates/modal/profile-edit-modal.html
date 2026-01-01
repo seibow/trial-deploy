@@ -1,0 +1,25 @@
+{% load static %}
+
+<!-- modal/logout_modal.html -->
+<div class="modal" id="profileeditModal{{ user.username }}" tabindex="-1" aria-labelledby="profileeditModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header position-relative">
+        <img src="{% static 'img/check-edit.png' %}" alt="変更確認うさぎ" class="modal-logo mx-auto d-block mt-4">
+        <button type="button" class="btn-close position-absolute end-0 top-0 me-2 mt-2" data-bs-dismiss="modal" aria-label="閉じる"></button>
+      </div>
+      <div class="modal-body mx-2 me-2">
+        変更してもよろしいですか？
+      </div>
+      <div class="modal-footer justify-content-center mb-4">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">キャンセル</button>
+
+        <!-- form profile-formを送信するフォーム -->
+        <button type="button" class="btn btn-submit"
+        onclick="document.getElementById('profile-form').submit();">
+          変更
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

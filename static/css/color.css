@@ -1,0 +1,18 @@
+/* 色を変更しやすいように記載している */
+
+:root {
+    --white: #ffffff;
+    --black: #000000;
+    --brown: #564533;
+    --lightbrown: #BB9164;
+    --orange: #FFC943;
+    --lightorange: rgba(255, 201, 67, 0.08);
+    --green: #2A9D8F;
+    --gray: #808080;
+    --lightgray: #B4B8C0;
+    --smoke: #E5E5E5;
+}
+
+
+
+

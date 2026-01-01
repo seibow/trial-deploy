@@ -1,0 +1,83 @@
+
+.full-height {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+@supports (min-height: 100dvh) {
+.full-height {
+    min-height: 100dvh;
+}
+}
+
+@media (orientation: landscape) {
+.full-height {
+    padding: 40px 0;
+}
+}
+
+
+/* ===== 全体 ===== */
+body {
+    background-color: var(--white);
+    font-family: 'ABeeZee', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* .message-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    width: 90%;
+    max-width: 600px;
+} */
+[ec2-user@ip-10-0-12-155 css]$ ls
+base-loggedin.css  base.css  color.css  modal.css
+[ec2-user@ip-10-0-12-155 css]$ cat base.css
+
+.full-height {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+@supports (min-height: 100dvh) {
+.full-height {
+    min-height: 100dvh;
+}
+}
+
+@media (orientation: landscape) {
+.full-height {
+    padding: 40px 0;
+}
+}
+
+
+/* ===== 全体 ===== */
+body {
+    background-color: var(--white);
+    font-family: 'ABeeZee', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* .message-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    width: 90%;
+    max-width: 600px;
+} */

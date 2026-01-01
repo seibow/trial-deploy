@@ -1,0 +1,17 @@
+{% extends "base/base-loggedin.html" %}
+{% load static %}
+{% block title %}
+    Habi | Life-Map
+{% endblock %}
+
+{% block main_content %}
+<div style="background-color: #FFC94314; color: #FFC943; min-height: 100vh;">
+  <div class="container py-5 text-center">
+    <h1 class="fw-bolder fs-1">Sorry</h1>
+    <img src="{% static 'img/sorry.png' %}" alt="準備中" class="img-fluid"
+    style="max-width: 300px; margin-inline: auto;"
+    >
+    <p>準備中です！</p>
+  </div>
+</div>
+{% endblock %}

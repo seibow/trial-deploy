@@ -1,0 +1,50 @@
+{% extends "base/base-loggedin.html" %}
+{% load static %}
+
+{% block body_class %}no-scroll{% endblock %}
+
+{% block title %}
+長期目標編集 | Habi
+{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'goals/css/goal_edit.css' %}">
+{% endblock %}
+
+{% block main_content %}
+    <div class="profile-header">
+        <a href="{% url 'goals:goal_detail' goal.id %}" class="cancel-link">キャンセル</a>
+        <h2>長期目標編集</h2>
+        <button type="submit" form="goal-edit-form" class="submit-link">変更</button>
+    </div>
+
+    <!-- フォーム -->
+    <form id="goal-edit-form" method="post" action="{% url 'goals:goal_edit' goal.id %}" class="profile-form">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <!-- 長期目標タイトル変更フォーム -->
+            <label for="title">タイトル</label> 
+            <input type="text" id="title" name="title" value="{{ goal.title }}" required>
+        </div>
+
+        <div class="form-group">
+            <!-- 期限変更フォーム -->
+            <label for="limit_age">達成期限</label>
+            <input type="date" id="limit_age" name="limit_age" value="{{ goal.limit_age|date:'Y-m-d' }}" required>
+        </div>
+        <span class="age-label">年齢</span>
+        <div class="age-wrapper">       
+            <span id="age-display" class="age-value">ー歳</span>
+        </div>
+        <span id="deadline-error" style="color: var(--brown); font-weight: bold;"></span>
+    </form>
+{% block extra_js %}
+{{ block.super }}
+<script>
+    const USER_BIRTHDAY = "{{ user.birthday }}";
+</script>
+<script src="{% static 'goals/js/age_calc.js' %}"></script>
+{% endblock %}
+{% endblock %}

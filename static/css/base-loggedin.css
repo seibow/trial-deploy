@@ -1,0 +1,152 @@
+/* ===== ヘッダー固定 ===== */
+.profile-header-area {
+    background: var(--white);
+    flex-shrink: 0; /* ヘッダーは縮まない・固定位置 */
+}
+
+.header-content {
+    position: fixed;       /* ← ここを fixed にする */
+    top: 0;                /* 画面最上部に固定 */
+    left: 0;
+    width: 100%;
+    z-index: 1000;         /* 他のUIより前面へ */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1px;
+    padding: 8px 10px;
+    background: var(--white);
+    box-sizing: border-box;
+}
+
+
+.profile-header-icon {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 20px 20px 15px 10px;
+}
+
+.header-text p {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    color: var(--brown);
+    line-height: 1.2;
+}
+
+.logout-button {
+    position: static;
+    transform: none;
+    margin-left: auto;
+}
+
+.logout-button img {
+    width: 43px;
+    height: 43px;
+    margin-right: 15px;
+}
+
+.message-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
+    word-break: break-word;
+    color: var(--brown);
+}
+
+p {
+    margin-bottom: 0;
+}
+
+
+/* 画面全体を上下で分割する */
+body {
+    min-height: 100vh; /* 画面全体 = 100% */
+    background: var(--white);
+    display: flex;
+    flex-direction: column; /* 縦並び */
+    /* overflow: hidden; /* 画面全体のスクロール禁止 */
+}
+
+.page-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-top: 150px;
+    padding-bottom: calc(70px + 40px);
+    background: var(--white);   /* ← これを追加！ヘッダーの高さぶん */
+    padding-bottom: 70px; /* ← これを追加！フッターの高さぶん */
+    min-height: calc(100vh - 70px); /* 重要：フッター分引いた高さを確保 */
+}
+
+
+
+/* ===== フッター固定 ===== */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px; /* ← あなたの環境で測ったサイズのままでOK */
+    background: var(--white);
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.12);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    flex-shrink: 0; /* フッターも縮まない・固定位置 */
+}
+
+
+
+@media (max-height: 800px) {
+.signup-card {
+    transform: scale(0.9);
+}
+}
+
+@media (max-height: 700px) {
+.signup-card {
+    transform: scale(0.85);
+}
+}
+
+@media (max-height: 600px) {
+.signup-card {
+    transform: scale(0.8);
+}
+}
+
+/* ===== スマホ対応 ===== */
+@media (max-width: 480px) {
+.signup-card {
+    max-width: 90%;
+    padding: 30px 20px;
+}
+.signup-title {
+    font-size: 20px;
+}
+.signup-button, .cancel-button {
+    font-size: 16px;
+    padding: 12px;
+}
+}
+.loggedin-message {
+
+    position: fixed !important;
+
+    top: 130px !important; /* ← header の高さに応じて調整 */
+
+    left: 50% !important;
+
+    transform: translateX(-50%) !important;
+
+    width: 90% !important;
+
+    z-index: 9999 !important;
+}

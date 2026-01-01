@@ -1,0 +1,135 @@
+.page-content {
+    background-color: var(--white);
+    margin: 0 13px;
+}
+
+/* ===== 長期目標（黄色）ボックス ===== */
+.goals_select {
+    position: relative; /* ← 縦ラインの基準にする */
+    background-color: #FFF4CF;  /* 柔らかい黄色 */
+    border-radius: 12px;
+    padding: 10px 14px 10px 18px; /* ← 左に少し余白を増やす */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    margin-bottom: 12px;
+    overflow: hidden; /* ← 線のはみ出し防止 */
+}
+
+/* 左の縦ライン（黄色） */
+.goals_select::before {
+    content: "";
+    position: absolute;
+    left: 0; /* ← ボックス内の左端 */
+    top: 0;
+    width: 6px;  /* 線の太さ */
+    height: 100%;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    background-color: #FFD75F; /* 黄色ライン */
+    z-index: 1;
+}
+
+/* ===== ステップ（緑）ボックス ===== */
+.step-items {
+    position: relative; /* ← 縦ラインの基準にする */
+    background-color: #B2DFDB; /* やや青寄りの緑 */
+    border-radius: 12px;
+    padding: 10px 14px 10px 18px; /* ← 左に少し余白を増やす */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    margin-bottom: 12px;
+    overflow: hidden; /* ← 線のはみ出し防止 */
+}
+
+/* 左の縦ライン（緑） */
+.step-items::before {
+    content: "";
+    position: absolute;
+    left: 0; /* ← ボックス内の左端 */
+    top: 0;
+    width: 6px;
+    height: 100%;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    background-color: #66B2A7; /* 緑ライン */
+    z-index: 1;
+}
+
+
+.d-flex.align-items-center.mb-3 {
+    margin-top: 10px;
+    margin-bottom: 24px !important;
+}
+
+body {
+    background: var(--white) !important;
+}
+
+.progress-bar.bg-success {
+    background-color: var(--green) !important; /* 柔らかいミント系の緑 */
+}
+
+.progress {
+    height: 16px; /* ← デフォルト8px前後。お好みで12〜16px程度に */
+}
+
+/* 左右の要素（月と三点リーダー）を固定幅に */
+.goals_select p:first-child,   /* 月の部分 */
+.goals_select button {         /* 三点リーダー */
+    flex-shrink: 0;
+    color: var(--brown);
+}
+
+.goals_select p:first-child {
+    margin-bottom: 0;
+}
+
+/* 中央のタイトル部分（長文対応） */
+.goals_select p:nth-child(2) {
+    margin: 0 7px; /* 左右に余白 */
+    word-break: break-word; /* 長い文も折り返し */
+    color: var(--brown);
+}
+
+/* 左右のボタンを固定幅にして潰れないようにする */
+.step-items form,
+.step-items button {
+    flex-shrink: 0;   /* ← 幅を固定 */
+}
+
+/* テキスト部分は基本は中央に */
+.step-items .step-title {  
+    flex-grow: 1;
+    margin: 0 10px;
+    word-break: break-word;
+    text-align: left;  /* ← centerではなくleftに */
+    display: flex;
+    justify-content: center;  /* ← 短い文字は中央に */
+    align-items: center;
+    color: var(--brown);
+}
+
+/* 真ん中のテキスト部分を伸縮OKに */
+.step-items p,
+.step-items span {
+    flex-grow: 1;
+    margin: 0 10px; /* 左右のアイコンと余白を確保 */
+    word-break: break-word; /* 長い文章も折り返す */
+}
+
+/* 完了済みステップの文字の色 */
+.step-title.step-done {
+    color: #8CBEB8;
+}
+
+/* チェックアイコン（未完・完了）の右側に余白を追加 */
+.step-items form img {
+    margin-right: 6px; /* ← お好みで6〜10px程度でもOK */
+    width: 23px;       /* 現在のサイズを維持 */
+    height: 23px;
+    flex-shrink: 0;    /* 潰れ防止（既に入っていてもOK） */
+}

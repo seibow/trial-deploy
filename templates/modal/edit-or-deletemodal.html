@@ -1,0 +1,43 @@
+{% load static %}
+
+<!-- modal/logout_modal.html -->
+<div class="modal edit-delete-modal" id="edit-or-deleteModal{{ goal.id }}" tabindex="-1" aria-labelledby="edit-or-deleteModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header position-relative">
+        <img src="{% static 'img/edit-or-delete.png' %}" alt="疑問うさぎ" class="modal-logo mx-auto d-block mt-4">
+        <button type="button" class="btn-close position-absolute end-0 top-0 me-2 mt-2" data-bs-dismiss="modal" aria-label="閉じる"></button>
+      </div>
+      <div class="modal-body">
+        <div class="initial-message"></div>
+        <div class="confirm-message" style="display:none";>
+          本当に削除しますか？
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center mb-4">
+        <div class="initial-modal-container d-flex flex-column gap-4 ">
+            <!-- 編集ボタン -->
+            <a href="{% url 'goals:goal_edit' goal.id %}">
+                <button type="submit" class="btn btn-edit btn-edit-link w-100">編集</button>
+            </a>
+        
+            <!-- 削除（ここは確認モードへ移行するトリガー。POSTはしない） -->
+            <button type="button" class="btn btn-submit btn-open-confirm">削除</button>
+
+            <!-- 最初から出ているキャンセルボタン -->
+            <button type="button" class="btn btn-outline-secondary btn-cancel" data-bs-dismiss="modal">キャンセル</button>
+        </div>
+        <div class="second-modal-container justify-content-center mb-4">
+            <!-- 本当に削除確認モーダルのキャンセルボタン（最初は非表示） -->
+            <button type="button" class="btn btn-outline-secondary btn-back" style="display:none;">キャンセル</button>
+            
+            <!-- POSTで削除するフォーム（最初は非表示） -->
+            <form method="post" action="{% url 'goals:goal_delete' goal.id  %}"class="confirm-delete-form" style="display:none;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-submit">本当に削除</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

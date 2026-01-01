@@ -1,0 +1,30 @@
+services:
+
+  web:
+    container_name: Django-prod
+    build:
+      context: .
+      dockerfile: ./docker/django/Dockerfile
+    env_file:
+      - .env.prod
+    volumes:
+      - static_volume:/code/staticfiles
+      - ./logs/app:/var/log/app
+    expose:
+      - "8000"
+#内部ポートをDocker内だけに公開
+  nginx:
+    container_name: nginx-prod
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - static_volume:/code/staticfiles
+      - ./logs/nginx:/var/log/nginx
+    depends_on:
+      web:
+        condition: service_started
+
+volumes:

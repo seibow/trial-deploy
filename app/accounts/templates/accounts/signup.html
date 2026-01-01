@@ -1,0 +1,65 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}新規登録 | Habi{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'accounts/css/signup.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="signup-container">
+    <div class="signup-card">
+        <h2 class="signup-title">新規登録</h2>
+            <form method="POST" class="signup-form">
+            {% csrf_token %}
+
+            <!-- 名前 -->
+            <label for="name">名前</label>
+            <div class="input-group">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="name" name="name"
+                    value="{{ name|default:'' }}" required>
+            </div>
+
+            <!-- メールアドレス -->
+            <label for="email">メールアドレス</label>
+            <div class="input-group">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" id="email" name="email"
+                    value="{{ email|default:'' }}" required>
+            </div>
+
+            <!-- パスワード -->
+            <label for="password1">パスワード</label>
+            <div class="input-group">
+                <i class="fa-solid fa-key"></i>
+                <input type="password" id="password1" name="password1" required>
+            </div>
+
+            <!-- パスワード確認 -->
+            <label for="password2">パスワード（確認）</label>
+            <div class="input-group">
+                <i class="fa-solid fa-key"></i>
+                <input type="password" id="password2" name="password2" required>
+            </div>
+
+            <!-- 生年月日 -->
+            <label for="birthday">生年月日</label>
+            <div class="input-group">
+            <i class="fa-solid fa-calendar-days"></i>
+            <input type="text" id="birthday" name="birthday"
+                    placeholder="誕生日を設定してください"
+                    onfocus="this.type='date'"
+                    value="{{ birthday|default:'' }}" required>
+            </div>
+
+            <!-- 登録ボタン -->
+            <button type="submit" class="signup-button">登録する</button>
+
+            <!-- キャンセルボタン -->
+            <a href="{% url 'login' %}" class="cancel-button">キャンセル</a>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+/* --- モーダル全体を少しコンパクトに --- */
+.modal-dialog {
+  max-width: 80%;  /* 幅を80%に調整（デフォルトより少し小さめ） */
+  margin: auto;
+}
+
+/* --- 区切り線（ボーダー）を消す --- */
+.modal-header,
+.modal-body,
+.modal-footer {
+  border: none !important;
+}
+
+.modal-body {
+  text-align: center;
+  color: var(--brown);
+}
+
+.btn.btn-submit {
+  color: var(--white);
+  background-color: var(--brown) !important;
+}
+
+.btn.btn-outline-secondary {
+  color: var(--brown);
+  border-color: var(--brown);
+}
+
+.btn.btn-edit {
+  color: var(--brown);
+  background-color: var(--lightbrown);
+}
+
+.initial-modal-container {
+    width: 70%;
+}
+
+.logout-button {
+  border: none;
+  background: none;
+  padding-right: 0;
+  margin-right: -10px;

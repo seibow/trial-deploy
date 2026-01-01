@@ -1,0 +1,141 @@
+
+/* ===== コンテナ中央寄せ ===== */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100dvh;
+    padding-top: 40px;
+    overflow-y: auto;
+}
+
+/* ===== カード ===== */
+.signup-card {
+    width: 90%;
+    max-width: 400px;
+    background: var(--white);
+    text-align: left;
+    transform: scale(0.9);
+    transform-origin: center center;
+}
+
+/* ===== タイトル ===== */
+.signup-title {
+    text-align: center;
+    color: var(--orange);
+    font-weight: bold;
+    font-size: 22px;
+    margin-bottom: 30px;
+}
+
+/* ===== ラベル ===== */
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: var(--brown);
+}
+
+/* ===== 入力グループ ===== */
+.input-group {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--lightgray);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 18px;
+    background-color: var(--white);
+}
+
+.input-group i {
+    color: var(--orange);
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.input-group input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: transparent;
+}
+
+/* ===== 登録ボタン ===== */
+.signup-button {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    background-color: var(--orange);
+    color: var(--brown);
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    text-align: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.signup-button:hover {
+    background-color: var(--orange);
+}
+
+/* ===== キャンセルボタン ===== */
+.cancel-button {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    margin-bottom: 40px;
+    border: 2px solid var(--orange);
+    border-radius: 30px;
+    color: var(--brown);
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    transition: background 0.3s ease;
+}
+
+.cancel-button:hover {
+    background-color: var(--white);
+}
+
+@media (max-height: 800px) {
+    .login-container {
+        transform: scale(0.9) translateY(-5%);
+    }
+}
+/*
+@media (max-height: 800px) {
+.signup-card {
+    transform: scale(0.9);
+}
+}
+
+@media (max-height: 700px) {
+.signup-card {
+    transform: scale(0.85);
+}
+}
+
+@media (max-height: 600px) {
+.signup-card {
+    transform: scale(0.8);
+}
+} */
+
+/* ===== スマホ対応 ===== 
+@media (max-width: 480px) {
+.signup-card {
+    max-width: 90%;
+    padding: 30px 20px;
+}
+.signup-title {
+    font-size: 20px;
+}
+.signup-button, .cancel-button {
+    font-size: 16px;
+    padding: 12px;
+}
+} */
