@@ -1,6 +1,6 @@
-Django==5.2
-mysqlclient
+Django==5.2.8
+mysqlclient==2.2.7
 python-dotenv
-gunicorn
+gunicorn==22.0.0
 boto3
 django-storages
