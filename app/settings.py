@@ -110,86 +110,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 #本番ではSTATIC_ROOT を指定する
-#STATIC_URL = '/static/'
-#STATICFILES_DIRS = [
-#    BASE_DIR / "static",  # ← APP/staticを読み込む
-#]
-#STATIC_ROOT = BASE_DIR / "staticfiles" #本番用
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # ← APP/staticを読み込む
+]
+STATIC_ROOT = BASE_DIR / "staticfiles" #本番用
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS","").split(",")
+#CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS","").split(",")
 #本番はCSRF_TRUSTED_ORIGINSにドメイン名とALBに変更
 LOGIN_URL = "/login/"
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
 
-#Django Logging(for CloudWatch)
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
 
-    "formatters": {
-        "verbose": {
-            "format": "[{asctime}] {levelname} {name} {message}",
-            "style": "{",
-        },
-    },
-
-    "handlers": {
-        "file": {
-            "level": "INFO",
-            "class": "logging.FileHandler",
-            "filename": "/var/log/app/django.log",  #CloudWatch Agentが読む場所
-            "formatter": "verbose",
-        },
-    },
-
-    "loggers": {
-        "django": {
-            "handlers": ["file"],
-            "level": "INFO",
-            "propagate": True,
-        },
-    },
-}
-
-#CloudFront + S3 Storage
-USE_S3 = not DEBUG  #本番ではS3、開発ではローカル
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_DIRS = [BASE_DIR / "static"]
-if USE_S3:
-    INSTALLED_APPS += ["storages"]
-
-    AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
-    AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
-    AWS_S3_CUSTOM_DOMAIN = os.getenv("AWS_S3_CUSTOM_DOMAIN")
-
-    AWS_DEFAULT_ACL = None
-    AWS_S3_FILE_OVERWRITE = False
-    AWS_LOCATION = "static"
-
-    STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/"
-        #Django 4.2以降はこちらを使用
-    STORAGES = {
-        "default": {
-            "BACKEND": "django.core.files.storage.FileSystemStorage",
-        },
-        "staticfiles": {
-            "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
-            "OPTIONS": {
-                "bucket_name": AWS_STORAGE_BUCKET_NAME,
-                "location": AWS_LOCATION,
-                "custom_domain": AWS_S3_CUSTOM_DOMAIN,
-                "default_acl": None,
-                "file_overwrite": False,
-            },
-        },
-    }
-
-else:
-    #ローカル開発用
-    STATIC_URL = "/static/"
