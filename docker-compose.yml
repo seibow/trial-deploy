@@ -8,6 +8,8 @@ services:
       - .env.prod
     expose:
       - "8000"
+    volumes:
+      - static_volume:/code/staticfiles  # ← collectstaticの出力先
     command: gunicorn app.wsgi:application --bind 0.0.0.0:8000 --workers 3
     restart: unless-stopped
 
@@ -18,7 +20,10 @@ services:
     container_name: nginx
     ports:
       - "80:80"
-    # volumesは削除（静的ファイルはイメージに焼き込まれているため不要）
+    volumes:
+      - static_volume:/usr/share/nginx/html/static  # ← 同じvolumeを参照
     depends_on:
       - web
     restart: unless-stopped
+volumes:
+  static_volume:
