@@ -121,7 +121,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles" #本番用
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS","").split(",")
+CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS","").split(",")
 #本番はCSRF_TRUSTED_ORIGINSにドメイン名とALBに変更
 LOGIN_URL = "/login/"
 SESSION_COOKIE_SECURE = not DEBUG
