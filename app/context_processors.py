@@ -3,7 +3,7 @@ import random
 
 def season_image(request):
     current_month = timezone.localtime().month
-    return {"season_image": f"img/season/{current_month}.png"}
+    return {"season_image": f"img/season/{current_month:02d}.png"}
 
 def random_message(request):
     """
