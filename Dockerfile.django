@@ -20,6 +20,10 @@ COPY requirements.txt .
 RUN pip install --upgrade pip \
     && pip install -r requirements.txt
 
+# entrypoint.shをコピーして実行権限付与
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # WORKDIRのappにsrc(Djangoアプリあるところ)へコピー
 COPY . /code/
 
@@ -28,5 +32,6 @@ RUN mkdir -p /var/log/app
 
 EXPOSE 8000
 
-# projectnameは後で正しいものに書き換える！
+# entrypointを設定
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["gunicorn", "app.wsgi:application", "--bind", "0.0.0.0:8000"]

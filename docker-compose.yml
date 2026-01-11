@@ -1,52 +1,24 @@
 services:
-  db:
-    container_name: MySQL
-    image: mysql:8.0
-    platform: linux/x86_64
-    environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-    env_file:
-      - .env
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci #UTF-8をデフォルトに。
-    volumes:
-      - mysql_data:/var/lib/mysql  
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "${MYSQL_USER}", "-p${MYSQL_PASSWORD}"]
-      interval: 10s
-      timeout: 10s
-      retries: 3
-      start_period: 30s  
   web:
-    container_name: Django
     build:
       context: .
-      dockerfile: ./docker/django/Dockerfile
+      dockerfile: Dockerfile.django
+    container_name: django_web
     env_file:
-      - .env
-    volumes:
-      - ./app:/code/app              
-      - ./static:/code/static     #staticフォルダ（Nginxと共有）
-      - ./staticfiles:/code/staticfiles  # collectstatic後のファイルを共有
-      - ./templates:/code/templates
-    depends_on:
-      db:
-        condition: service_healthy
+      - .env.prod
+    expose:
+      - "8000"
+    command: gunicorn app.wsgi:application --bind 0.0.0.0:8000 --workers 3
+    restart: unless-stopped
+
   nginx:
-    container_name: nginx
     build:
       context: .
-      dockerfile: ./docker/nginx/Dockerfile
+      dockerfile: Dockerfile.nginx
+    container_name: nginx
     ports:
-      - "8000:80"
-    volumes:
-      - ./static:/code/static   # staticは共有する
-      - ./staticfiles:/code/staticfiles
+      - "80:80"
+    # volumesは削除（静的ファイルはイメージに焼き込まれているため不要）
     depends_on:
-      web:
-        condition: service_started
-
-volumes:
-  mysql_data:
+      - web
+    restart: unless-stopped
