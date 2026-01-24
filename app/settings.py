@@ -121,12 +121,20 @@ STATIC_ROOT = BASE_DIR / "staticfiles" #本番用
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#本番はCSRF_TRUSTED_ORIGINSにドメイン名に変更
 CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS","").split(",")
-#本番はCSRF_TRUSTED_ORIGINSにドメイン名とALBに変更
+
 LOGIN_URL = "/login/"
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
+# ALBがHTTPS化しているので、Djangoに信じさせる＋万一スルーされたらhttpはリダイレクトさせる
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
+
+# デフォルトでも'Lax'ではあるが将来性のために明示
+CSRF_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'Lax'
+
 
 
 
