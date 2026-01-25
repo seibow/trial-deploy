@@ -130,6 +130,8 @@ CSRF_COOKIE_SECURE = not DEBUG
 # ALBがHTTPS化しているので、Djangoに信じさせる＋万一スルーされたらhttpはリダイレクトさせる
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
+# ヘルスチェックはhttpなので、そこだけ例外でOKとする
+SECURE_REDIRECT_EXEMPT = [r"^health/"]
 
 # デフォルトでも'Lax'ではあるが将来性のために明示
 CSRF_COOKIE_SAMESITE = 'Lax'
