@@ -8,7 +8,12 @@ load_dotenv(BASE_DIR / ".env.prod")
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 DEBUG = os.getenv("DEBUG", "False").lower() in ("true", "1", "yes")
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
+# .envのスペース対策
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.getenv("ALLOWED_HOSTS", "").split(",")
+    if host.strip()
+]
 
 
 # Application definition
@@ -129,9 +134,14 @@ SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
 # ALBがHTTPS化しているので、Djangoに信じさせる＋万一スルーされたらhttpはリダイレクトさせる
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
 SECURE_SSL_REDIRECT = True
 # ヘルスチェックはhttpなので、そこだけ例外でOKとする
 SECURE_REDIRECT_EXEMPT = [r"^health/"]
+
+# HSTS
+SECURE_HSTS_SECONDS = 3600
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 # デフォルトでも'Lax'ではあるが将来性のために明示
 CSRF_COOKIE_SAMESITE = 'Lax'
