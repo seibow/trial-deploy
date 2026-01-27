@@ -115,11 +115,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 #本番ではSTATIC_ROOT を指定する
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",  # ← APP/staticを読み込む
-]
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+    # BASE_DIR / "static",  # ← APP/staticを読み込む
+# ]
+STATIC_URL = "https://d2e4sq3futvfaj.cloudfront.net/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles" #本番用
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
