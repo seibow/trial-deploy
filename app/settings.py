@@ -122,7 +122,18 @@ USE_TZ = True
 # ]
 STATIC_URL = "https://d2e4sq3futvfaj.cloudfront.net/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles" #本番用
-STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "OPTIONS": {
+            "bucket_name": "habi-static",
+            "location": "static",
+        },
+    },
+}
 
 
 # Default primary key field type
