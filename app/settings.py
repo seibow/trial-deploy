@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'app.accounts.apps.AccountsConfig',
     'app.goals.apps.GoalsConfig',
     'app.steps.apps.StepsConfig',
+    "storages",
 ]
 
 AUTH_USER_MODEL = 'accounts.User'
