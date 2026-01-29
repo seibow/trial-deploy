@@ -117,9 +117,9 @@ USE_TZ = True
 
 #本番ではSTATIC_ROOT を指定する
 # STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-    # BASE_DIR / "static",  # ← APP/staticを読み込む
-# ]
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # ← APP/staticを読み込む
+]
 
 AWS_S3_REGION_NAME = "ap-northeast-1"
 STATIC_URL = "https://d2e4sq3futvfaj.cloudfront.net/static/"
