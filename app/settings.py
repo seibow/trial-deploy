@@ -129,7 +129,7 @@ STORAGES = {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "BACKEND": "app.storages.StaticStorage",
         "OPTIONS": {
             "bucket_name": "habi-static",
             "location": "static",
