@@ -4,7 +4,7 @@ from mimetypes import guess_type
 
 class StaticStorage(S3Boto3Storage):
     location = "static"
-    default_acl = "public-read"
+    custom_domain = 'd2e4sq3futvfaj.cloudfront.net'
     querystring_auth = False
 
     def _save(self, name, content):
