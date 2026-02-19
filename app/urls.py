@@ -18,10 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.http import HttpResponse
 from django.shortcuts import redirect
+from . import views
 
 urlpatterns = [
     path('', lambda request: redirect('login')),
-    path('health/', lambda request: HttpResponse("ok")),
+    path('health/', views.health_check),
     path('admin/', admin.site.urls),
     path('goals/', include(('app.goals.urls'))),
     path('', include('app.accounts.urls')),
