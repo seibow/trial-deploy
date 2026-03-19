@@ -1,3 +1,5 @@
+# 本リポジトリは2025-Autumn-RareTECH-Team-B/appのアプリケーションをAWSでデプロイするための練習用です。内容は2025-Autumn-RareTECH-Team-B/appと同様になります
+
 ### プロジェクトタイトル  
 ***
 # Habi(ハビ)　「人生設計をするアプリです」
